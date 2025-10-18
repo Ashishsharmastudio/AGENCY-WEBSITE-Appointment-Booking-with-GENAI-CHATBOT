@@ -1,7 +1,6 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Calendar, HelpCircle, CreditCard } from "lucide-react";
+import { Mail, MapPin, Send, Calendar, HelpCircle, CreditCard } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -80,7 +79,7 @@ export default function ContactPage() {
       } else {
         setStatus(`❌ ${data.error || "Failed to send message. Please try again."}`);
       }
-    } catch (error) {
+    } catch {
       setStatus("⚠️ Network error. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);

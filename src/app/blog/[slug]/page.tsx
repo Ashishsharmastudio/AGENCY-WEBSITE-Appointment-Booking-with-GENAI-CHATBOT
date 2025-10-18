@@ -28,7 +28,13 @@ export default async function BlogDetailPage(context: { params: Promise<{ slug: 
           {new Date(blog.createdAt).toLocaleDateString()} • By {blog.author || "Admin"} • {blog.category || "General"}
         </p>
         {blog.image && (
-          <img src={blog.image} alt={blog.title} width={800} height={400} className="w-full rounded-xl border border-white/20 mt-8" />
+          <Image
+          src={blog.image}
+          alt={blog.title}
+          width={800}
+          height={400}
+          className="w-full rounded-xl border border-white/20 mt-8"
+        />
         )}
         <article className="prose prose-invert max-w-none mt-8">
           <div dangerouslySetInnerHTML={{ __html: blog.content }} />

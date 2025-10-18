@@ -3,7 +3,11 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
 
-export async function generateSmartResponse(services: any[], question: string) {
+// removed `any[]`
+export async function generateSmartResponse(
+  services: Array<Record<string, unknown>>,
+  question: string
+) {
   const prompt = `
   You are a smart home solutions expert for a modern digital agency.
   Available Services: ${JSON.stringify(services, null, 2)}
@@ -18,6 +22,5 @@ export async function generateSmartResponse(services: any[], question: string) {
   `;
 
   const result = await model.generateContent(prompt);
-  const text = result.response.text();
-  return text;
+  return result.response.text();
 }

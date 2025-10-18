@@ -34,7 +34,7 @@ export default async function BlogPage() {
             className="rounded-2xl border border-white/20 bg-white/5 backdrop-blur-lg shadow-lg overflow-hidden group hover:shadow-cyan-500/30 transition"
           >
             <div className="relative w-full h-52 overflow-hidden">
-              <img
+              <Image
                 src={blog.image || "/vercel.svg"}
                 alt={blog.title}
                 width={400}

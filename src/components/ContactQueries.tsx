@@ -66,7 +66,7 @@ export default function ContactQueries() {
       } else {
         setError(result.error || "Failed to fetch queries");
       }
-    } catch (err) {
+    } catch {
       setError("Network error occurred");
     } finally {
       setLoading(false);
