@@ -22,7 +22,7 @@ export default function Header() {
       <Link href="/">
          <div className="flex items-center gap-2">
            <div className={`w-7 h-7 rounded-full ${isAdminPage ? "bg-gradient-to-r from-blue-500 to-purple-500" : "bg-gradient-to-r from-purple-500 to-cyan-400"}`} />
-           <span className="font-semibold text-lg">Divyansh-Agency</span>
+           <span className="font-semibold text-lg">Ashish-Agency</span>
          </div>
       </Link>
       {/* Navigation (optional hide for admin) */}

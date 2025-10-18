@@ -34,7 +34,7 @@ export default function Footer() {
         {/* 🪩 Brand */}
         <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-lg border border-transparent hover:border-cyan-400/50 hover:shadow-[0_0_30px_#06b6d4a0] transition-all duration-500">
           <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-3">
-            Divyansh Agency
+            Ashish Agency
           </h2>
           <p className="text-gray-400 text-sm leading-relaxed">
             Crafting high-performance websites, AI solutions, and SaaS dashboards that transform businesses into digital powerhouses.
@@ -91,7 +91,7 @@ export default function Footer() {
 
       {/* 🧠 Bottom Bar */}
       <div className="mt-16 pt-6 border-t border-white/10 text-center text-gray-500 text-sm tracking-wide">
-        © {new Date().getFullYear()} Divyansh Agency. Designed & developed with ❤️ using Next.js + Tailwind.
+        © {new Date().getFullYear()} ashish Agency. Designed & developed with ❤️ using Next.js + Tailwind.
       </div>
     </footer>
   );

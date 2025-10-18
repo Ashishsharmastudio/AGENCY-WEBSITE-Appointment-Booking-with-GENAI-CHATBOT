@@ -113,7 +113,7 @@ export default function ContactPage() {
             </div> */}
             <div className="flex items-center gap-3">
               <Mail className="text-cyan-400" />
-              <span>divyanshxtudio@gmail.com</span>
+              <span>ashishsharmastudio@gmail.com</span>
             </div>
           </div>
 
