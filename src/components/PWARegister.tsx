@@ -31,7 +31,6 @@ export default function PWARegister() {
           });
         });
       } catch (err) {
-        // eslint-disable-next-line no-console
         console.warn("SW registration failed", err);
       }
     };

@@ -18,7 +18,7 @@ export default function SimpleNotificationPrompt() {
     try {
       await Notification.requestPermission();
       setShow(false);
-    } catch (e) {
+    } catch (_error) {
       setShow(false);
     }
   };

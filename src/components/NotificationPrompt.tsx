@@ -35,7 +35,7 @@ export default function NotificationPrompt() {
       }
       setShouldShow(false);
       localStorage.setItem(STORAGE_KEY, "1");
-    } catch (e) {
+    } catch (_error) {
       setShouldShow(false);
       localStorage.setItem(STORAGE_KEY, "1");
     }

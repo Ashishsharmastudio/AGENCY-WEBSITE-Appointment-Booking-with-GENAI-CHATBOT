@@ -4,7 +4,6 @@ import Providers from "../components/Providers";
 import Chatbot from "@/components/Chatbot";
 import Header from "@/components/Header";
 import PWARegister from "../components/PWARegister";
-import StaticNotificationPrompt from "../components/StaticNotificationPrompt";
 
 export const metadata = {
   title: "Agency Website | Portfolio & Services",

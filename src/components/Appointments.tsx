@@ -2,10 +2,34 @@
 import { useEffect, useState } from "react";
 import { Calendar, User, MessageSquare } from "lucide-react";
 
-// ✅ Define a strong type for appointments
+// Raw appointment data from API
+interface RawAppointment {
+  _id?: string;
+  name?: string;
+  fullName?: string;
+  email?: string;
+  mobile?: string;
+  address?: string;
+  user?: {
+    name?: string;
+    email?: string;
+    mobile?: string;
+    address?: string;
+  };
+  service?: string;
+  date: string;
+  message?: string;
+}
+
+// Normalized appointment type after processing
 interface Appointment {
   _id?: string;
-  user?: { name?: string; email?: string; mobile?: string; address?: string };
+  user: {
+    name: string;
+    email: string;
+    mobile: string;
+    address: string;
+  };
   service?: string;
   date: string;
   message?: string;
@@ -21,8 +45,8 @@ export default function Appointments() {
         const res = await fetch("/api/appointments/all");
         const data = await res.json();
         // Normalize shape: older documents may have contact fields at the root
-        const raw = data?.data || [];
-        const normalized = raw.map((a: any) => {
+        const raw = (data?.data || []) as RawAppointment[];
+        const normalized = raw.map((a) => {
           return {
             ...a,
             user: {
