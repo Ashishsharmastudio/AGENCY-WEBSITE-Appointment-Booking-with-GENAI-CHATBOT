@@ -1,0 +1,36 @@
+/* Custom Scrollbar Styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* default thumb: gradient matching site accent */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4, #7b2ff7);
+  border-radius: 10px;
+  border: 2px solid rgba(0,0,0,0.08); /* slight border for contrast */
+}
+
+/* hover/active states: darker so text remains readable */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:active,
+.custom-scrollbar:active::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0891b2, #6d28d9);
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Keep native select option text visible in most browsers. Note: styling options is limited */
+.custom-scrollbar option {
+  color: #0f172a; /* dark text for options */
+  background-color: #ffffff; /* white background for options to ensure contrast */
+}
+
+/* When option is selected/focused - prefer a visible accent with dark text */
+.custom-scrollbar option:checked,
+.custom-scrollbar option:focus {
+  background-color: #06b6d4;
+  color: #000000;
+}
+  
