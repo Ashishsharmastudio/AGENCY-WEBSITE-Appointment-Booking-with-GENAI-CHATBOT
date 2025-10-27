@@ -191,30 +191,6 @@ export default function ContactPage() {
               />
               {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
             </div>
-            
-            {/* Appointment Date Picker */}
-            <div>
-              <div className={`flex items-center gap-3 bg-white/5 border rounded-lg px-4 py-3 ${
-                errors.appointment ? 'border-red-400' : 'border-white/20'
-              }`}>
-                <Calendar className="text-cyan-400" />
-                <input
-                  type="date"
-                  name="appointment"
-                  value={appointment}
-                  onChange={(e) => {
-                    setAppointment(e.target.value);
-                    if (errors.appointment) {
-                      setErrors({ ...errors, appointment: "" });
-                    }
-                  }}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="bg-transparent outline-none w-full text-white"
-                  required
-                />
-              </div>
-              {errors.appointment && <p className="text-red-400 text-sm mt-1">{errors.appointment}</p>}
-            </div>
 
             <div>
               <textarea

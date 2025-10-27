@@ -43,5 +43,3 @@ export default async function BlogDetailPage(context: { params: Promise<{ slug: 
     </section>
   );
 }
-
-

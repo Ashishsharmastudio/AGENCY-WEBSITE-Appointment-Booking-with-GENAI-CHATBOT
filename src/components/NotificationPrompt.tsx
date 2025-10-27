@@ -35,7 +35,8 @@ export default function NotificationPrompt() {
       }
       setShouldShow(false);
       localStorage.setItem(STORAGE_KEY, "1");
-    } catch (_error) {
+    } catch (error) {
+      console.error('Failed to request notification permission:', error);
       setShouldShow(false);
       localStorage.setItem(STORAGE_KEY, "1");
     }

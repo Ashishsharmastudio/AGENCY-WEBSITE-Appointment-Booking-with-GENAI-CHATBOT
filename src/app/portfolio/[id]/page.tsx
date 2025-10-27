@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 async function fetchProject(id: string) {
   try {
@@ -13,15 +14,37 @@ async function fetchProject(id: string) {
   }
 }
 
-export default async function ProjectDetailPage(context: { params: Promise<{ id: string }> }) {
-  const { id } = await context.params;
-  const project = await fetchProject(id);
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const project = await fetchProject(params.id);
+  if (!project) {
+    return {
+      title: "Project Not Found",
+      description: "The requested project could not be found.",
+    };
+  }
+  // You can add more metadata fields here if needed
+  return {
+    title: project.title,
+    description: project.description || project.title,
+  };
+}
+
+export default async function Page({ params }: { params: { id: string } }) {
+  const project = await fetchProject(params.id);
   if (!project) return notFound();
+
   const live = project.liveUrl || project.link || project.demoUrl;
   const git = project.githubUrl || project.github || project.repoUrl;
 
+  const schema = generateProjectSchema(project as ProjectMetadata);
+
   return (
-    <section className="min-h-screen w-full bg-[#0a0a0a] text-white py-20 px-6">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <section className="min-h-screen w-full bg-[#0a0a0a] text-white py-20 px-6">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-extrabold">
           {project.title}
@@ -32,7 +55,7 @@ export default async function ProjectDetailPage(context: { params: Promise<{ id:
 
         {project.image && (
           <div className="relative w-full h-96 mt-8 rounded-xl overflow-hidden border border-gray-800">
-            <Image src={project.image} alt={project.title} fill className="object-cover" />
+            <Image src={project.image} alt={project.title} fill className="object-cover" priority />
           </div>
         )}
 
@@ -66,7 +89,6 @@ export default async function ProjectDetailPage(context: { params: Promise<{ id:
         </div>
       </div>
     </section>
+    </>
   );
 }
-
-

@@ -47,9 +47,9 @@ export default function Portfolio() {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 640) setCardsPerView(1); // Mobile
-      else if (width < 1024) setCardsPerView(2); // Tablet
-      else setCardsPerView(3); // Desktop
+      if (width < 640) setCardsPerView(1);
+      else if (width < 1024) setCardsPerView(2);
+      else setCardsPerView(3);
     };
 
     handleResize();
@@ -81,25 +81,37 @@ export default function Portfolio() {
   }, [cardsPerView, projects.length]);
 
   return (
-    <section className="relative z-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-20 px-4 sm:px-6">
+    <section className="relative z-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 sm:py-20 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto text-center">
         {/* Title */}
-        <h2 className="text-4xl font-bold text-white mb-6">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">
           Our Recent Projects
         </h2>
-        <p className="text-gray-400 mb-12 text-sm sm:text-base">
+        <p className="text-gray-400 mb-10 sm:mb-12 text-sm sm:text-base">
           Here’s a glimpse of what we’ve built for our amazing clients.
         </p>
 
         {/* ✅ Responsive Auto Scroll Slider */}
         <div
           ref={scrollRef}
-          className="flex gap-6 sm:gap-8 overflow-x-hidden scroll-smooth no-scrollbar"
+          className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            overflowY: "hidden",
+          }}
         >
+          <style jsx>{`
+            /* Hide scrollbar (WebKit) */
+            ::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+
           {projects.map((project, index) => (
             <div
               key={index}
-              className="min-w-[90%] sm:min-w-[48%] lg:min-w-[30%] relative group rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 backdrop-blur-lg hover:scale-105 transform transition duration-500"
+              className="min-w-[85%] sm:min-w-[48%] lg:min-w-[30%] snap-start relative group rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-white/5 backdrop-blur-lg hover:scale-105 transform transition duration-500"
             >
               {/* Project Image */}
               <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-80">
@@ -114,11 +126,11 @@ export default function Portfolio() {
               </div>
 
               {/* Overlay Content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 bg-black/50 backdrop-blur-md">
-                <h3 className="text-2xl font-semibold text-white mb-2 drop-shadow-lg">
+              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500 bg-black/50 backdrop-blur-md px-3 text-center">
+                <h3 className="text-lg sm:text-2xl font-semibold text-white mb-1 sm:mb-2 drop-shadow-lg">
                   {project.title}
                 </h3>
-                <p className="text-gray-200 text-sm max-w-xs drop-shadow-md px-3">
+                <p className="text-gray-200 text-xs sm:text-sm max-w-xs drop-shadow-md">
                   {project.description}
                 </p>
               </div>

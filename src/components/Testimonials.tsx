@@ -10,7 +10,7 @@ export default function Testimonials() {
       role: "CEO, TechNova (USA)",
       feedback:
         "Outstanding work! The SaaS platform they built for us exceeded expectations in performance and design.",
-      image: "/clients/michael.jpg",
+      image: "/clients/Michael.jpg",
     },
     {
       name: "Emily Carter",

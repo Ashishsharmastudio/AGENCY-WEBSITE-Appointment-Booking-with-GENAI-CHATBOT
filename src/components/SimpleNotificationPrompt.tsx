@@ -18,7 +18,8 @@ export default function SimpleNotificationPrompt() {
     try {
       await Notification.requestPermission();
       setShow(false);
-    } catch (_error) {
+    } catch (error) {
+      console.error('Failed to request notification permission:', error);
       setShow(false);
     }
   };

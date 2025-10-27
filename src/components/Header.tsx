@@ -106,9 +106,6 @@ export default function Header() {
           <Link href="/contact" onClick={() => setOpen(false)}>
             Contact
           </Link>
-          <Link href="/booking" onClick={() => setOpen(false)}>
-            Booking
-          </Link>
           <Link
             href="/admin"
             className="flex justify-center items-center gap-2 mt-2 text-sm opacity-80"
