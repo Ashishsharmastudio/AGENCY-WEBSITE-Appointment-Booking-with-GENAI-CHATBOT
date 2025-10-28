@@ -2,6 +2,32 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
+interface ProjectMetadata {
+  title: string;
+  description?: string;
+  image?: string;
+  category?: string;
+  createdAt: string;
+  technologies?: string[];
+  liveUrl?: string;
+  link?: string;
+  demoUrl?: string;
+  githubUrl?: string;
+  github?: string;
+  repoUrl?: string;
+}
+
+function generateProjectSchema(project: ProjectMetadata) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": project.title,
+    "description": project.description || project.title,
+    "image": project.image,
+    "dateCreated": project.createdAt,
+  };
+}
+
 async function fetchProject(id: string) {
   try {
     const base = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000';
@@ -14,8 +40,9 @@ async function fetchProject(id: string) {
   }
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const project = await fetchProject(params.id);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const project = await fetchProject(id);
   if (!project) {
     return {
       title: "Project Not Found",
@@ -29,14 +56,15 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const project = await fetchProject(params.id);
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const project = await fetchProject(id);
   if (!project) return notFound();
 
   const live = project.liveUrl || project.link || project.demoUrl;
   const git = project.githubUrl || project.github || project.repoUrl;
 
-  const schema = generateProjectSchema(project as ProjectMetadata);
+  const schema = generateProjectSchema(project);
 
   return (
     <>

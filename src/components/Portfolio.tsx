@@ -81,8 +81,8 @@ export default function Portfolio() {
   }, [cardsPerView, projects.length]);
 
   return (
-    <section className="relative z-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 sm:py-20 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="relative z-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 sm:py-20 px-4 sm:px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center overflow-hidden">
         {/* Title */}
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6">
           Our Recent Projects
@@ -94,7 +94,7 @@ export default function Portfolio() {
         {/* ✅ Responsive Auto Scroll Slider */}
         <div
           ref={scrollRef}
-          className="flex gap-6 sm:gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
+          className="flex gap-6 sm:gap-8 overflow-x-hidden scroll-smooth snap-x snap-mandatory no-scrollbar"
           style={{
             scrollbarWidth: "none",
             msOverflowStyle: "none",
