@@ -4,7 +4,6 @@ import Providers from "../components/Providers";
 import Chatbot from "@/components/Chatbot";
 import Header from "@/components/Header";
 import PWARegister from "../components/PWARegister";
-import Script from "next/script";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
