@@ -4,6 +4,7 @@ import Providers from "../components/Providers";
 import Chatbot from "@/components/Chatbot";
 import Header from "@/components/Header";
 import PWARegister from "../components/PWARegister";
+import Script from "next/script";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
@@ -66,6 +67,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <link rel="apple-touch-icon" href="/Apps.png" />
       </head>
+      {/* Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-RZM27Q6Q6R"
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RZM27Q6Q6R');
+          `,
+        }}
+      />
       <body className="bg-gray-50 text-gray-900" suppressHydrationWarning={true}>
         <Providers>
           <Header/>

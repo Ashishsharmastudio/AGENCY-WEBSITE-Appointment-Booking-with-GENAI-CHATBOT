@@ -11,15 +11,31 @@ interface ProjectData {
 }
 
 async function fetchAllSlugs() {
+  // During build time, skip API calls as server may not be running
+  if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL) {
+    return { blogs: [], projects: [] };
+  }
+
   try {
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL ||
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
     const [blogsRes, projectsRes] = await Promise.all([
-      fetch(`${baseUrl}/api/blogs?published=true`),
-      fetch(`${baseUrl}/api/projects`),
+      fetch(`${baseUrl}/api/blogs?published=true`, { 
+        next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(5000) 
+      }),
+      fetch(`${baseUrl}/api/projects`, { 
+        next: { revalidate: 3600 },
+        signal: AbortSignal.timeout(5000) 
+      }),
     ]);
+
+    if (!blogsRes.ok || !projectsRes.ok) {
+      console.error("Error fetching slugs: API returned error status");
+      return { blogs: [], projects: [] };
+    }
 
     const blogs: BlogData[] = await blogsRes.json();
     const projects: ProjectData[] = await projectsRes.json();
