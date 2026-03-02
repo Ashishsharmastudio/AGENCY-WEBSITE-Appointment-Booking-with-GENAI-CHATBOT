@@ -38,12 +38,6 @@ export default function Header() {
           <Link href="/services" className="hover:text-white transition">
             Services
           </Link>
-          <Link href="/portfolio" className="hover:text-white transition">
-            Portfolio
-          </Link>
-          <Link href="/blog" className="hover:text-white transition">
-            Blog
-          </Link>
           <Link href="/about" className="hover:text-white transition">
             About
           </Link>
@@ -93,12 +87,6 @@ export default function Header() {
           </Link>
           <Link href="/services" onClick={() => setOpen(false)}>
             Services
-          </Link>
-          <Link href="/portfolio" onClick={() => setOpen(false)}>
-            Portfolio
-          </Link>
-          <Link href="/blog" onClick={() => setOpen(false)}>
-            Blog
           </Link>
           <Link href="/about" onClick={() => setOpen(false)}>
             About
