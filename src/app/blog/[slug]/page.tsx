@@ -1,21 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { getBlogBySlug } from "@/lib/data";
 
-async function fetchBlog(slug: string) {
-  try {
-    const base = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || 'http://localhost:3000';
-    const res = await fetch(`${base}/api/blogs/${slug}`, { next: { revalidate: 60 } });
-    if (!res.ok) return null;
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching blog:', error);
-    return null;
-  }
-}
-
-export default async function BlogDetailPage(context: { params: Promise<{ slug: string }> }) {
+export default async function BlogDetailPage(context: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await context.params;
-  const blog = await fetchBlog(slug);
+  const blog = await getBlogBySlug(slug);
   if (!blog) return notFound();
 
   return (
@@ -25,16 +16,17 @@ export default async function BlogDetailPage(context: { params: Promise<{ slug: 
           {blog.title}
         </h1>
         <p className="text-gray-400 mt-3">
-          {new Date(blog.createdAt).toLocaleDateString()} • By {blog.author || "Admin"} • {blog.category || "General"}
+          {new Date(blog.createdAt).toLocaleDateString()} • By{" "}
+          {blog.author || "Admin"} • {blog.category || "General"}
         </p>
         {blog.image && (
           <Image
-          src={blog.image}
-          alt={blog.title}
-          width={800}
-          height={400}
-          className="w-full rounded-xl border border-white/20 mt-8"
-        />
+            src={blog.image}
+            alt={blog.title}
+            width={800}
+            height={400}
+            className="w-full rounded-xl border border-white/20 mt-8"
+          />
         )}
         <article className="prose prose-invert max-w-none mt-8">
           <div dangerouslySetInnerHTML={{ __html: blog.content }} />

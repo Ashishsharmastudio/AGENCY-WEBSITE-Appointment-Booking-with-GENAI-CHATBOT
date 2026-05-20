@@ -7,7 +7,7 @@ export default function Chatbot() {
     {
       role: "assistant",
       content:
-        "Hello! I'm Ashish's qualifying assistant. I assess project alignment across clinical systems, aviation dashboards, and RAG platforms. What's your name and business domain?",
+        "Hello! I&apos;m Ashish&apos;s qualifying assistant. I assess project alignment across clinical systems, aviation dashboards, and RAG platforms. What&apos;s your name and business domain?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -29,8 +29,7 @@ export default function Chatbot() {
     setMessages((prev) => [...prev, { role: "user", content: t }]);
     setInput("");
 
-    let nextPhase = botState.phase;
-    let nextState = { ...botState };
+    const nextState = { ...botState };
 
     setTimeout(async () => {
       if (botState.phase === "greet") {
@@ -50,7 +49,8 @@ export default function Chatbot() {
           ...prev,
           {
             role: "assistant",
-            content: "Understood. What is your biggest technical or operational bottleneck right now?",
+            content:
+              "Understood. What is your biggest technical or operational bottleneck right now?",
           },
         ]);
       } else if (botState.phase === "bottleneck") {
@@ -60,7 +60,8 @@ export default function Chatbot() {
           ...prev,
           {
             role: "assistant",
-            content: "Got it. What is your estimated budget for this solution? (e.g. $1,500–$2,000 / ₹5,00,000 / custom)",
+            content:
+              "Got it. What is your estimated budget for this solution? (e.g. $1,500–$2,000 / ₹5,00,000 / custom)",
           },
         ]);
       } else if (botState.phase === "budget") {
@@ -70,12 +71,15 @@ export default function Chatbot() {
           ...prev,
           {
             role: "assistant",
-            content: "Excellent. Generating your qualification summary and dispatching to Ashish's inbox…",
+            content:
+              "Excellent. Generating your qualification summary and dispatching to Ashish&apos;s inbox…",
           },
         ]);
 
         // Dispatch
-        const key = localStorage.getItem("web3forms_access_key") || "ea7d1911-c91f-49b8-b4b7-df35ef2e6399";
+        const key =
+          localStorage.getItem("web3forms_access_key") ||
+          "ea7d1911-c91f-49b8-b4b7-df35ef2e6399";
         const msg = `Qualified Bot Lead:\n- Name: ${nextState.name}\n- Domain: ${nextState.domain}\n- Bottleneck: ${nextState.bottleneck}\n- Budget: ${nextState.budget}`;
         try {
           const res = await fetch("https://api.web3forms.com/submit", {
@@ -103,7 +107,8 @@ export default function Chatbot() {
             ...prev,
             {
               role: "assistant",
-              content: "Ashish has been notified. Expect contact within 12 hours.",
+              content:
+                "Ashish has been notified. Expect contact within 12 hours.",
             },
           ]);
         }
@@ -115,7 +120,11 @@ export default function Chatbot() {
   return (
     <>
       <div id="bot-bubble" onClick={toggleBotPanel}>
-        {!isOpen && <div className="bot-notification" id="bot-notif">1</div>}
+        {!isOpen && (
+          <div className="bot-notification" id="bot-notif">
+            1
+          </div>
+        )}
         <svg viewBox="0 0 24 24">
           <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
         </svg>
@@ -126,7 +135,7 @@ export default function Chatbot() {
           <div className="bot-title-area">
             <div className="bot-avatar">AS</div>
             <div>
-              <div className="bot-status-text">Ashish's System Bot</div>
+              <div className="bot-status-text">Ashish&apos;s System Bot</div>
               <div className="bot-status-sub">Qualifying Expert Assistant</div>
             </div>
           </div>

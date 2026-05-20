@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 export default function Header() {
   return (
     <nav>
-      <a href="/" className="nav-logo">
+      <Link href="/" className="nav-logo">
         Ashish <span>Sharma</span>
-      </a>
+      </Link>
       <div className="nav-links">
         <a href="#for-who">Who I Help</a>
         <a href="#what-i-build">What I Build</a>

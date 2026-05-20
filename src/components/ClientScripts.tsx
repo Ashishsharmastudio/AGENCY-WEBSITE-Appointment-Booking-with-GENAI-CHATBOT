@@ -1,6 +1,10 @@
 "use client";
 import { useEffect } from "react";
 
+interface WindowWithNotification extends Window {
+  showNotification?: (text: string) => void;
+}
+
 export default function ClientScripts() {
   useEffect(() => {
     // Cursor logic
@@ -29,7 +33,7 @@ export default function ClientScripts() {
     };
 
     const interactiveElements = document.querySelectorAll(
-      "a, button, .document-item, .world-continent, .map-hotspot, .dashboard-widget"
+      "a, button, .document-item, .world-continent, .map-hotspot, .dashboard-widget",
     );
     interactiveElements.forEach((el) => {
       el.addEventListener("mouseenter", handleMouseEnter);
@@ -37,7 +41,8 @@ export default function ClientScripts() {
     });
 
     // Notification logic
-    (window as any).showNotification = function (text: string) {
+    const win = window as WindowWithNotification;
+    win.showNotification = function (text: string) {
       const box = document.getElementById("notif-box");
       const textEl = document.getElementById("notif-text");
       if (box && textEl) {

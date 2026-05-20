@@ -1,5 +1,17 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
+
+interface WindowWithNotification extends Window {
+  showNotification?: (text: string) => void;
+}
+
+type MapRegion = {
+  title: string;
+  compliance: string;
+  info: string;
+};
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("rag-tab");
@@ -18,7 +30,7 @@ export default function Home() {
     info: "Click on any continental zone to view regional airworthiness certifications, compliance logs, and operational office hubs.",
   });
 
-  const mapData: any = {
+  const mapData: Record<string, MapRegion> = {
     americas: {
       title: "Americas Region Hub",
       compliance: "FAA Part 145 & 14 CFR Compliant",
@@ -41,17 +53,23 @@ export default function Home() {
     },
   };
 
-  const handleMapClick = (region: string) => {
+  const handleMapClick = (region: keyof typeof mapData) => {
     setMapRegion(mapData[region]);
-    if (typeof window !== "undefined" && (window as any).showNotification) {
-      (window as any).showNotification("Selected: " + mapData[region].title);
+    if (typeof window !== "undefined") {
+      const win = window as WindowWithNotification;
+      if (win.showNotification) {
+        win.showNotification("Selected: " + mapData[region].title);
+      }
     }
   };
 
   const handleRagContext = (ctx: string) => {
     setRagContext(ctx);
-    if (typeof window !== "undefined" && (window as any).showNotification) {
-      (window as any).showNotification("RAG context updated.");
+    if (typeof window !== "undefined") {
+      const win = window as WindowWithNotification;
+      if (win.showNotification) {
+        win.showNotification("RAG context updated.");
+      }
     }
   };
 
@@ -95,10 +113,13 @@ export default function Home() {
         headers: { Accept: "application/json" },
       });
       if (res.ok) {
-        if (typeof window !== "undefined" && (window as any).showNotification) {
-          (window as any).showNotification(
-            "Message sent! I'll be in touch within 24 hours.",
-          );
+        if (typeof window !== "undefined") {
+          const win = window as WindowWithNotification;
+          if (win.showNotification) {
+            win.showNotification(
+              "Message sent! I'll be in touch within 24 hours.",
+            );
+          }
         }
         form.reset();
       } else {
@@ -114,18 +135,21 @@ export default function Home() {
     }
   };
 
-  const handleDragStart = (e: any) => {
-    e.dataTransfer.setData("text", e.target.id);
+  const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
+    e.dataTransfer.setData("text", e.currentTarget.id);
   };
 
-  const handleDrop = (e: any) => {
+  const handleDrop = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     const id = e.dataTransfer.getData("text");
     const el = document.getElementById(id);
-    if (el && e.currentTarget) {
+    if (el && e.currentTarget instanceof HTMLElement) {
       e.currentTarget.appendChild(el);
-      if (typeof window !== "undefined" && (window as any).showNotification) {
-        (window as any).showNotification("Widget layout updated.");
+      if (typeof window !== "undefined") {
+        const win = window as WindowWithNotification;
+        if (win.showNotification) {
+          win.showNotification("Widget layout updated.");
+        }
       }
     }
   };
@@ -244,9 +268,9 @@ export default function Home() {
                 Open the booking flow and submit a scheduling request for your
                 chosen service.
               </p>
-              <a href="/booking" className="btn-outline">
+              <Link href="/booking" className="btn-outline">
                 Open Booking
-              </a>
+              </Link>
             </div>
             <div className="feature-card">
               <h3>Talk to the AI Bot</h3>
@@ -267,9 +291,9 @@ export default function Home() {
               <p>
                 Browse completed projects and review the platform work examples.
               </p>
-              <a href="/portfolio" className="btn-outline">
+              <Link href="/portfolio" className="btn-outline">
                 View Portfolio
-              </a>
+              </Link>
             </div>
             <div className="feature-card">
               <h3>Send a Direct Brief</h3>
@@ -287,9 +311,9 @@ export default function Home() {
                 Review submissions, appointments, and content management from
                 the admin panel.
               </p>
-              <a href="/admin" className="btn-outline">
+              <Link href="/admin" className="btn-outline">
                 Open Admin
-              </a>
+              </Link>
             </div>
             <div className="feature-card">
               <h3>Read the Blog</h3>
@@ -297,9 +321,9 @@ export default function Home() {
                 Discover thought leadership and case insights from the published
                 blog content.
               </p>
-              <a href="/blog" className="btn-outline">
+              <Link href="/blog" className="btn-outline">
                 View Blog
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -636,19 +660,19 @@ export default function Home() {
           <div className="workspace-tabs">
             <button
               className={`tab-btn ${activeTab === "rag-tab" ? "active" : ""}`}
-              onClick={(e) => setActiveTab("rag-tab")}
+              onClick={() => setActiveTab("rag-tab")}
             >
               Clinical RAG Pipeline
             </button>
             <button
               className={`tab-btn ${activeTab === "map-tab" ? "active" : ""}`}
-              onClick={(e) => setActiveTab("map-tab")}
+              onClick={() => setActiveTab("map-tab")}
             >
               Global Aviation Map
             </button>
             <button
               className={`tab-btn ${activeTab === "map-tab" ? "active" : ""}`}
-              onClick={(e) => setActiveTab("widget-tab")}
+              onClick={() => setActiveTab("widget-tab")}
             >
               Drag &amp; Resize Grid
             </button>
