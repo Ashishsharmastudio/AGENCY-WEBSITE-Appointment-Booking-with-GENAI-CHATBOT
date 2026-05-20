@@ -1,0 +1,36 @@
+{
+  "my-agency": {
+    "appointments": [
+      {
+        "user": {
+          "name": "Ashish Sharma",
+          "email": "ashishsharmastudio@gmail.com",
+          "mobile": "+919140585097",
+          "address": "Delhi"
+        },
+        "service": "Web Development",
+        "date": "2026-05-21T00:00:00.000Z",
+        "message": "test appointment",
+        "fileUrl": "",
+        "createdAt": "2026-05-20T18:03:49.682Z",
+        "updatedAt": "2026-05-20T18:03:49.682Z",
+        "_id": "6a0df78534355ff4bd4d175f"
+      },
+      {
+        "user": {
+          "name": "Ashish Sharma",
+          "email": "ashishsharmastudio@gmail.com",
+          "mobile": "+919140585097",
+          "address": ""
+        },
+        "service": "Mobile Apps",
+        "date": "2026-05-21T00:00:00.000Z",
+        "message": "ddddddddddddddddd",
+        "fileUrl": "",
+        "createdAt": "2026-05-20T18:12:08.768Z",
+        "updatedAt": "2026-05-20T18:12:08.768Z",
+        "_id": "6a0df9785a465cf359242e08"
+      }
+    ]
+  }
+}

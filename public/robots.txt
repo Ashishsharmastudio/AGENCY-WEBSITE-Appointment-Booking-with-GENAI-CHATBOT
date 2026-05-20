@@ -1,0 +1,12 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow access to API routes
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
